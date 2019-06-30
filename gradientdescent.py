@@ -22,7 +22,7 @@ b = 0
 iterations = 100000
 n = float(len(x))
 learning_rate = 0.01
-x = normalization(x)
+x = x / max(x)
 tmp_cost = 0
 for i in range(iterations):
     y_predicted = m * x + b
@@ -35,7 +35,12 @@ for i in range(iterations):
     b = b - learning_rate * tmp_b
     tmp_cost = cost
 
-# np.save("train_result", [m, b])
+x = x * max_x
+m = m / max(x)
+
+print(m, m / max(x), max(x), b)
+np.save("train_result", [m, b])
+
 
 xDraw = np.linspace(min(x),max(x),1000)
 yDraw = m * xDraw + b
